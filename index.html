@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>DIG | Captura de Campo</title>
+
+  <!-- Bootstrap 4 -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+  <link rel="stylesheet" href="./styles.css"/>
+
+  <!-- Firebase v8 -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+
+  <!-- Google Maps (pon tu key) -->
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvhXkpjn3NIKaTnuL3X_W-IMty4urq2MA"></script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo">DIG</div>
+        <div class="titles">
+          <div class="t1">Captura de Campo</div>
+          <div class="t2">Mobile-first · Firebase RTDB · Buckets DIG</div>
+        </div>
+      </div>
+      <button class="btn btn-sm btn-outline-light d-none" id="btnLogout">Salir</button>
+    </header>
+
+    <!-- LOGIN -->
+    <section class="cardx" id="loginCard">
+      <div class="cardx-h">Iniciar sesión</div>
+      <div class="cardx-b">
+        <div class="form-row">
+          <div class="form-group col-12">
+            <label>Usuario</label>
+            <input class="form-control form-control-lg" id="loginUser" placeholder="Ej: dig1" autocomplete="username">
+          </div>
+          <div class="form-group col-12">
+            <label>Contraseña</label>
+            <input type="password" class="form-control form-control-lg" id="loginPass" placeholder="••••" autocomplete="current-password">
+          </div>
+        </div>
+
+        <button class="btn btn-primary btn-lg btn-block" id="btnLogin">Entrar</button>
+
+        <div class="hint mt-3">
+          *Tu usuario está ligado a un bucket (DIG1…DIG20). Todo lo que captures se guarda ahí.
+        </div>
+
+        <div class="alert alert-danger mt-3 d-none" id="loginErr"></div>
+      </div>
+    </section>
+
+    <!-- APP -->
+    <section class="d-none" id="app">
+      <section class="cardx">
+        <div class="cardx-h">
+          <div>
+            <div class="who" id="whoLine">—</div>
+            <div class="meta" id="bucketLine">—</div>
+          </div>
+          <span class="chip" id="statusChip">Listo</span>
+        </div>
+
+        <div class="cardx-b">
+          <div class="mini-map" id="map"></div>
+
+          <div class="grid2 mt-3">
+            <button class="btn btn-outline-light btn-lg" id="btnGPS">📍 Tomar GPS</button>
+            <button class="btn btn-success btn-lg" id="btnSave">Guardar</button>
+          </div>
+
+          <div class="form-row mt-3">
+            <div class="form-group col-12">
+              <label>Equipo</label>
+              <select class="form-control form-control-lg" id="equipo">
+                <option value="">— Selecciona equipo —</option>
+              </select>
+            </div>
+
+            <div class="form-group col-12">
+              <label>Comentario / Observaciones</label>
+              <input class="form-control form-control-lg" id="comentario" placeholder="Ej: Poste encendido / OK" />
+            </div>
+
+            <div class="form-group col-6">
+              <label>Latitud</label>
+              <input class="form-control form-control-lg" id="latitud" readonly />
+            </div>
+            <div class="form-group col-6">
+              <label>Longitud</label>
+              <input class="form-control form-control-lg" id="longitud" readonly />
+            </div>
+
+            <div class="form-group col-12">
+              <label>Fecha y hora</label>
+              <input class="form-control form-control-lg" id="fecha_hora" readonly />
+            </div>
+          </div>
+
+          <div class="alert alert-warning d-none" id="warnBox"></div>
+          <div class="alert alert-success d-none" id="okBox"></div>
+        </div>
+      </section>
+
+      <section class="cardx mt-3">
+        <div class="cardx-h">Mis capturas de hoy</div>
+        <div class="cardx-b">
+          <div class="list" id="todayList">
+            <div class="hint">Aún no hay capturas.</div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <footer class="foot">
+      <span>DIG Field · Mobile-first</span>
+      <span id="netDot" class="net ok">●</span>
+    </footer>
+  </div>
+
+  <!-- Bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+  <script src="firebaseConfig.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

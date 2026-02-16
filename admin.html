@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>DIG Admin · Usuarios y Buckets</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+
+  <style>
+    body{ background:#0b1418; color:#e7f0f3; }
+    .wrap{ max-width: 980px; margin:0 auto; padding:18px; }
+    .card{ background: rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.10); border-radius:14px; }
+    .form-control{ background: rgba(0,0,0,.25); border:1px solid rgba(255,255,255,.10); color:#e7f0f3; border-radius:12px; }
+    label{ color: rgba(231,240,243,.75); font-weight:700; }
+    .smallmuted{ color: rgba(231,240,243,.65); font-size: 13px; }
+    code{ color:#36d6c4; }
+  </style>
+
+  <!-- Firebase v8 -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+</head>
+
+<body>
+  <div class="wrap">
+    <h3 class="mb-3">DIG Admin</h3>
+    <p class="smallmuted">
+      Crea usuarios en <code>Usuarios/&lt;username&gt;</code> y genera buckets <code>DIG1..DIG20</code>.
+    </p>
+
+    <div class="card p-3 mb-3">
+      <h5>1) Crear / Actualizar Usuario</h5>
+      <div class="form-row">
+        <div class="form-group col-md-3">
+          <label>Username</label>
+          <input id="uUser" class="form-control" placeholder="ej: dig1">
+        </div>
+        <div class="form-group col-md-3">
+          <label>Password (plano)</label>
+          <input id="uPass" class="form-control" placeholder="ej: 1234">
+        </div>
+        <div class="form-group col-md-3">
+          <label>Bucket</label>
+          <input id="uBucket" class="form-control" placeholder="ej: DIG2_PTE o DIG10">
+        </div>
+        <div class="form-group col-md-3">
+          <label>DisplayName</label>
+          <input id="uName" class="form-control" placeholder="ej: Cuadrilla DIG1">
+        </div>
+      </div>
+
+      <button class="btn btn-success" id="btnSaveUser">Guardar Usuario</button>
+      <button class="btn btn-outline-light ml-2" id="btnLoadUser">Cargar Usuario</button>
+
+      <div class="alert alert-info mt-3 d-none" id="uMsg"></div>
+    </div>
+
+    <div class="card p-3 mb-3">
+      <h5>2) Crear Buckets DIG en lote</h5>
+      <div class="form-row">
+        <div class="form-group col-md-2">
+          <label>Desde</label>
+          <input id="bFrom" type="number" class="form-control" value="1">
+        </div>
+        <div class="form-group col-md-2">
+          <label>Hasta</label>
+          <input id="bTo" type="number" class="form-control" value="20">
+        </div>
+        <div class="form-group col-md-8">
+          <label>Opcional: sufijo</label>
+          <input id="bSuffix" class="form-control" placeholder="ej: _PTE (deja vacío para normal)">
+          <div class="smallmuted mt-1">Si pones <code>_PTE</code> creará DIG1_PTE..DIG20_PTE</div>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" id="btnCreateBuckets">Crear Buckets</button>
+      <div class="alert alert-info mt-3 d-none" id="bMsg"></div>
+    </div>
+
+    <div class="card p-3">
+      <h5>3) Plantilla JSON (opcional)</h5>
+      <p class="smallmuted mb-2">
+        Si prefieres, copia/pega en tu RTDB manualmente (Import JSON).
+      </p>
+      <textarea id="jsonOut" class="form-control" rows="10" readonly></textarea>
+      <button class="btn btn-outline-light mt-2" id="btnGenJson">Generar plantilla JSON</button>
+    </div>
+  </div>
+
+  <script src="firebaseConfig.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
