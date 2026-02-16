@@ -70,8 +70,15 @@
           <div class="mini-map" id="map"></div>
 
           <div class="grid2 mt-3">
-            <button class="btn btn-outline-light btn-lg" id="btnGPS">📍 Tomar GPS</button>
-            <button class="btn btn-success btn-lg" id="btnSave">Guardar</button>
+           <button class="btn btn-lg btn-app btn-gps" id="btnGPS">
+  <span class="btn-icon"><span id="gpsDot" class="gps-pulse gps-off"></span></span>
+  <span id="gpsLabel">Tomar GPS</span>
+</button>
+
+<button class="btn btn-lg btn-app btn-save" id="btnSave">
+  <span class="btn-icon">✓</span>
+  Guardar
+</button>
           </div>
 
           <div class="form-row mt-3">
@@ -131,5 +138,6 @@
   <script src="app.js"></script>
 </body>
 </html>
+
 
 
